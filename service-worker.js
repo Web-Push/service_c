@@ -10,9 +10,9 @@ self.addEventListener('message', function (event) {
 /** Push通知を受けたときの処理 */
 self.addEventListener('push', function(event) {
   console.log('Received a push message', event);
-  self.registration.showNotification('サービスB', {
+  self.registration.showNotification('サービスC', {
     body:'お知らせ通知',
-    tag:'service_b_test-notification-tag' ,
+    tag:'service_c_test-notification-tag' ,
     silent:true
   });
   event.waitUntil(
@@ -43,12 +43,12 @@ self.addEventListener('notificationclick', function(event) {
   }).then(function(clientList) {
     for (var i = 0; i < clientList.length; i++) {
       var client = clientList[i];
-      if (client.url === 'https://web-push.github.io/service_b/' && 'focus' in client) {
+      if (client.url === 'https://web-push.github.io/service_c/' && 'focus' in client) {
         return client.focus();
       }
     }
     if (clients.openWindow) {
-      return clients.openWindow('https://web-push.github.io/service_b/');
+      return clients.openWindow('https://web-push.github.io/service_c/');
     }
   }));
 });
@@ -145,18 +145,18 @@ function checkLogin(jsondata) {
           cnt++;
         }
       }
-      //showNotification(result, user);
-      showNotification(true, user);
+      showNotification(result, user);
+      //showNotification(true, user);
     };
   };
 }
 
 /** Notificationの表示処理 */
 function showNotification(result, user) {
-  var title = 'サービスB';
+  var title = 'サービスC';
   var body = '';
   var icon = '/images/icon-192x192.png';
-  var tag = 'service_b_test-notification-tag';
+  var tag = 'service_c_test-notification-tag';
 
   if (result === true) {
     body = user + 'さんへお知らせ';
